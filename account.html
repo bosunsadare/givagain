@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+  <!-- Good default declaration:
+  * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+  * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+  * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+    * Enable inline JS: add 'unsafe-inline' to default-src
+    * Enable eval(): add 'unsafe-eval' to default-src
+  * Create your own at http://cspisawesome.com
+  -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+  <link rel="stylesheet" type="text/css" href="css/givagain.css" />
+  <script src="js/jquery-1.12.3.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+  <script src="js/givagain.js"></script>
+  <title>My Account</title>
+</head>
+
+<body>
+  <div data-role="page" id="login">
+    <div data-role="header" data-position="fixed">
+      <h1>LOGIN</h1>
+    </div>
+    <div role="main" class="ui-content">
+      <h2>Welcome to Givagain</h2>
+      <form id="login-form" method="POST" onsubmit="loginForm()">
+        <label for="login-username" class="ui-hidden-accessible">Username</label>
+        <input type="text" name="username" id="login-username" placeholder="Username" maxlength="25" required>
+        <label for="login-password" class="ui-hidden-accessible">Password</label>
+        <input type="password" name="password" id="login-password" placeholder="Password" autocomplete="off" maxlength="25" required>
+        <input type="submit" data-icon="arrow-r" data-iconpos="right" value="Login">
+      </form>
+      <p class="ui-mini"><a href="#forgot" data-transition="slide">Forgot Username or Password?</a></p>
+      <p>&nbsp;</p>
+      <p>If you are new to Givagain, you will need to register with us. Click the button below to do so.</p>
+      <a href="#register" class="ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-right ui-btn-b">Create Account</a>
+    </div>
+  </div>
+
+  <div data-role="page" id="register">
+    <div data-role="header" data-position="fixed">
+      <a href="#login" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext" data-rel="back">Back</a>
+      <h1>REGISTER</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2>Create My Account</h2>
+      <form id="registration-form" method="POST">
+        <label for="reg-username" class="ui-hidden-accessible">Username</label>
+        <input type="text" name="reg-username" id="reg-username" placeholder="Username" maxlength="25" required>
+        <label for="reg-password" class="ui-hidden-accessible">Password</label>
+        <input type="password" name="reg-password" id="reg-password" placeholder="Password" autocomplete="off" maxlength="25" required>
+        <h3 class="ui-bar ui-bar-a">My Details</h3>
+        <div class="ui-body">
+          <label for="name" class="ui-hidden-accessible">Name</label>
+          <input type="text" name="name" id="name" placeholder="Full Name" value="" maxlength="30">
+          <label for="email" class="ui-hidden-accessible">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email Address" value="" maxlength="60">
+        </div>
+        <input type="submit" data-icon="icon-user" data-iconpos="right" value="Register">
+      </form>
+      <p><a href="#login">Login</a> if you already have an account.</p>
+    </div>
+
+  </div>
+
+  <div data-role="page" id="create-pin">
+    <div data-role="header" data-position="fixed">
+      <h1>Create PIN</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2>Short Identification</h2>
+      <form method="POST" id="pin-form">
+        <fieldset class="ui-grid-d">
+          <div class="ui-block-a">
+            <label for="firstpin" class="ui-hidden-accessible">1st</label>
+            <input type="password" name="firstpin" id="firstpin" value="1" maxlength="1" onfocus="this.value='';" onblur="if (this.value=='') {this.value='1';}" required>
+          </div>
+          <div class="ui-block-b">
+            <label for="secondpin" class="ui-hidden-accessible">2nd</label>
+            <input type="password" name="secondpin" id="secondpin" value="2" maxlength="2" onfocus="this.value='';" onblur="if (this.value=='') {this.value='2';}" required>
+          </div>
+          <div class="ui-block-c">
+            <label for="thirdpin" class="ui-hidden-accessible">3rd</label>
+            <input type="password" name="thirdpin" id="thirdpin" value="3" maxlength="3" onfocus="this.value='';" onblur="if (this.value=='') {this.value='3';}" required>
+          </div>
+          <div class="ui-block-d">
+            <label for="fourthpin" class="ui-hidden-accessible">4th</label>
+            <input type="password" name="fouthpin" id="fouthpin" value="4" maxlength="4" onfocus="this.value='';" onblur="if (this.value=='') {this.value='4';}" required>
+          </div>
+          <div class="ui-block-e">
+            <label for="fifthpin" class="ui-hidden-accessible">5th</label>
+            <input type="password" name="fifthpin" id="fifthpin" value="5" maxlength="5" onfocus="this.value='';" onblur="if (this.value=='') {this.value='5';}" required>
+          </div>
+        </fieldset>
+        <p>Create a Personal Identification Number to aid quicker login. Click finish if you do not want to add a card yet.
+        </p>
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a"><a href="#add-card" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right" data-transition="slide">Add Card</a></div>
+          <div class="ui-block-b"><input type="submit" value="Finish" data-theme="b" data-icon="user" data-iconpos="right"></div>
+        </fieldset>
+      </form>
+    </div>
+
+  </div>
+
+  <div data-role="page" id="add-card">
+    <div data-role="header" data-position="fixed">
+      <a href="#create-pin" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext" data-rel="back" data-transition="slide">Back</a>
+      <h1>Add a Card</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2>Card Details</h2>
+      <p>Your card details remain encrypted on your device and are never saved on our servers.</p>
+      <form id="addcard-form" method="POST" action="">
+        <label for="card-type" class="select ui-hidden-accessible">Card Type</label>
+        <select name="card-type" id="card-type" required>
+          <option value="" disabled selected>Select Card Type</option>
+          <option value="visa">Visa</option>
+          <option value="mastercard">MasterCard</option>
+          <option value="amex">American Express</option>
+          <option value="discovery">Discovery</option>
+        </select>
+        <label for="card-number" class="ui-hidden-accessible">Card Number</label>
+        <input type="text" name="card-number" id="card-number" value="" placeholder="Long Number" autocomplete="off" maxlength="14" required>
+        <label for="exp-date" class="ui-hidden-accessible">Expiry Date</label>
+        <input type="text" name="exp-date" id="exp-date" placeholder="mm/yyyy" value="" maxlength="7" pattern="[0-9]{2}\/[0-9]{4}" required>
+        <label for="cvc" class="ui-hidden-accessible">Card Verification Code</label>
+        <input type="text" name="cvc" id="cvc" placeholder="CVC" value="" maxlength="3" pattern="[0-9]{3}" required>
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a"><a href="#add-card" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right">Another</a></div>
+          <div class="ui-block-b"><input type="submit" value="Add this" data-theme="b" data-icon="carat-r" data-iconpos="right"></div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div data-role="page" id="forgot">
+    <div data-role="header" data-position="fixed">
+      <a href="#login" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext" data-rel="back" data-transition="slide">Back</a>
+      <h1>Retrieve Details</h1>
+    </div>
+    <div role="main" class="ui-content">
+      <h2>Forgotten your details?</h2>
+      <label for="forgot-email" class="ui-hidden-accessible">Email</label>
+      <input type="email" name="forgot-email" id="forgot-email" placeholder="Your Email" maxlength="60">
+      <h4>Memorable Question:</h4>
+      <p id="memorable-question">&nbsp;</p>
+      <label for="answer" class="ui-hidden-accessible">Your Answer</label>
+      <input type="text" name="answer" id="answer" placeholder="Answer" maxlength="60">
+    </div>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <div class="bottom-logo">
+      <img src="img/fav.png" />
+    </div>
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+</body>
+
+</html>
