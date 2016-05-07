@@ -1,24 +1,5 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
 
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 
 <head>
@@ -88,7 +69,7 @@
           <label for="email" class="ui-hidden-accessible">Email</label>
           <input type="email" name="email" id="email" placeholder="Email Address" value="" maxlength="60">
         </div>
-        <input type="submit" data-icon="icon-user" data-iconpos="right" value="Register">
+        <input type="submit" data-icon="icon-user" data-iconpos="right" value="Register" onclick="location.assign('#create-pin');">
       </form>
       <p><a href="#login">Login</a> if you already have an account.</p>
     </div>
@@ -102,31 +83,25 @@
 
     <div role="main" class="ui-content">
       <h2>Short Identification</h2>
+      <p>Set your PIN with the sliders :-)</p>
       <form method="POST" id="pin-form">
-        <fieldset class="ui-grid-d">
-          <div class="ui-block-a">
-            <label for="firstpin" class="ui-hidden-accessible">1st</label>
-            <input type="password" name="firstpin" id="firstpin" value="1" maxlength="1" onfocus="this.value='';" onblur="if (this.value=='') {this.value='1';}" required>
-          </div>
-          <div class="ui-block-b">
-            <label for="secondpin" class="ui-hidden-accessible">2nd</label>
-            <input type="password" name="secondpin" id="secondpin" value="2" maxlength="2" onfocus="this.value='';" onblur="if (this.value=='') {this.value='2';}" required>
-          </div>
-          <div class="ui-block-c">
-            <label for="thirdpin" class="ui-hidden-accessible">3rd</label>
-            <input type="password" name="thirdpin" id="thirdpin" value="3" maxlength="3" onfocus="this.value='';" onblur="if (this.value=='') {this.value='3';}" required>
-          </div>
-          <div class="ui-block-d">
-            <label for="fourthpin" class="ui-hidden-accessible">4th</label>
-            <input type="password" name="fouthpin" id="fouthpin" value="4" maxlength="4" onfocus="this.value='';" onblur="if (this.value=='') {this.value='4';}" required>
-          </div>
-          <div class="ui-block-e">
-            <label for="fifthpin" class="ui-hidden-accessible">5th</label>
-            <input type="password" name="fifthpin" id="fifthpin" value="5" maxlength="5" onfocus="this.value='';" onblur="if (this.value=='') {this.value='5';}" required>
-          </div>
-        </fieldset>
-        <p>Create a Personal Identification Number to aid quicker login. Click finish if you do not want to add a card yet.
-        </p>
+
+        <label for="firstpin" class="ui-hidden-accessible">Slider1:</label>
+        <input type="range" name="firstpin" id="firstpin" value="5" min="0" max="9">
+
+        <label for="secondpin" class="ui-hidden-accessible">Slider2:</label>
+        <input type="range" name="secondpin" id="secondpin" value="5" min="0" max="9">
+
+        <label for="thirdpin" class="ui-hidden-accessible">Slider3:</label>
+        <input type="range" name="thirdpin" id="thirdpin" value="5" min="0" max="9">
+
+        <label for="fourthpin" class="ui-hidden-accessible">Slider4:</label>
+        <input type="range" name="fourthpin" id="fourthpin" value="5" min="0" max="9">
+
+        <label for="fifthpin" class="ui-hidden-accessible">Slider5:</label>
+        <input type="range" name="fifthpin" id="fifthpin" value="5" min="0" max="9">
+
+        <p>Click finish if you do not want to add a card yet.</p>
         <fieldset class="ui-grid-a">
           <div class="ui-block-a"><a href="#add-card" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right" data-transition="slide">Add Card</a></div>
           <div class="ui-block-b"><input type="submit" value="Finish" data-theme="b" data-icon="user" data-iconpos="right"></div>
@@ -145,7 +120,7 @@
     <div role="main" class="ui-content">
       <h2>Card Details</h2>
       <p>Your card details remain encrypted on your device and are never saved on our servers.</p>
-      <form id="addcard-form" method="POST" action="">
+      <form id="addcard-form" method="POST">
         <label for="card-type" class="select ui-hidden-accessible">Card Type</label>
         <select name="card-type" id="card-type" required>
           <option value="" disabled selected>Select Card Type</option>
@@ -155,14 +130,22 @@
           <option value="discovery">Discovery</option>
         </select>
         <label for="card-number" class="ui-hidden-accessible">Card Number</label>
-        <input type="text" name="card-number" id="card-number" value="" placeholder="Long Number" autocomplete="off" maxlength="14" required>
-        <label for="exp-date" class="ui-hidden-accessible">Expiry Date</label>
-        <input type="text" name="exp-date" id="exp-date" placeholder="mm/yyyy" value="" maxlength="7" pattern="[0-9]{2}\/[0-9]{4}" required>
+        <input type="text" name="card-number" id="card-number" pattern="[0-9]*" value="" placeholder="Long Number" autocomplete="off" maxlength="14" required>
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <label for="exp-date" class="ui-hidden-accessible">Expiry Date</label>
+            <input type="text" name="exp-date" id="exp-date" placeholder="Expiry Date mm/yyyy" value="" maxlength="7" pattern="[0-9]{2}\/[0-9]{4}" required>
+          </div>
+          <div class="ui-block-b">
+            <label for="issue-date" class="ui-hidden-accessible">Issue Date</label>
+            <input type="text" name="issue-date" id="issue-date" placeholder="Issue Date mm/yyyy" value="" maxlength="7" pattern="[0-9]{2}\/[0-9]{4}" required>
+          </div>
+        </fieldset>
         <label for="cvc" class="ui-hidden-accessible">Card Verification Code</label>
-        <input type="text" name="cvc" id="cvc" placeholder="CVC" value="" maxlength="3" pattern="[0-9]{3}" required>
+        <input type="text" name="cvc" id="cvc" placeholder="CVC" value="" maxlength="4" pattern="[0-9]*" required>
         <fieldset class="ui-grid-a">
           <div class="ui-block-a"><a href="#add-card" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right">Another</a></div>
-          <div class="ui-block-b"><input type="submit" value="Add this" data-theme="b" data-icon="carat-r" data-iconpos="right"></div>
+          <div class="ui-block-b"><input type="submit" value="Add this" data-theme="b" data-icon="carat-r" data-iconpos="right" onclick="location.assign('give.html#giving')"></div>
         </fieldset>
       </form>
     </div>
@@ -175,12 +158,15 @@
     </div>
     <div role="main" class="ui-content">
       <h2>Forgotten your details?</h2>
-      <label for="forgot-email" class="ui-hidden-accessible">Email</label>
-      <input type="email" name="forgot-email" id="forgot-email" placeholder="Your Email" maxlength="60">
-      <h4>Memorable Question:</h4>
-      <p id="memorable-question">&nbsp;</p>
-      <label for="answer" class="ui-hidden-accessible">Your Answer</label>
-      <input type="text" name="answer" id="answer" placeholder="Answer" maxlength="60">
+      <form method="post" id="forgot-form">
+        <label for="forgot-email" class="ui-hidden-accessible">Email</label>
+        <input type="email" name="forgot-email" id="forgot-email" placeholder="Your Email" maxlength="60">
+        <h4>Memorable Question:</h4>
+        <p id="memorable-question">&nbsp;</p>
+        <label for="answer" class="ui-hidden-accessible">Your Answer</label>
+        <input type="text" name="answer" id="answer" placeholder="Answer" maxlength="60">
+        <input type="submit" value="Send Reset Link" data-theme="b" data-icon="carat-r" data-iconpos="right">
+      </form>
     </div>
   </div>
 
