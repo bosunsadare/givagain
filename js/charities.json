@@ -1,23 +1,23 @@
 {
   "Charities": [
     {
-      "value": "Jesus House LDN",
+      "name": "Jesus House LDN",
       "description": "Jesus House London"
     },
     {
-      "value": "Save The Children UK",
+      "name": "Save The Children UK",
       "description": "Save The Children UK"
     },
     {
-      "value": "Teach First UK",
+      "name": "Teach First UK",
       "description": "Teach First UK"
     },
     {
-      "value": "Comic Relief UK",
+      "name": "Comic Relief UK",
       "description": "Comic Relief UK"
     },
     {
-      "value": "Cancer Research UK",
+      "name": "Cancer Research UK",
       "description": "Cancer Research UK"
     }
   ]

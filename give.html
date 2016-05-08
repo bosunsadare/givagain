@@ -27,6 +27,8 @@
     <div role="main" class="ui-content">
       <h2>Bless your giving heart!</h2>
       <form id="giving-form" method="POST">
+        <label for="charities" class="select ui-hidden-accessible">Charity</label>
+        <select name="charities" id="charities" required></select>
         <label for="cvc-number" class="ui-hidden-accessible">Card Verification Code</label>
         <input type="text" name="cvc-number" id="cvc-number" placeholder="CVC Number" maxlength="4" required>
         <label for="amount" class="ui-hidden-accessible">Donation Amount</label>
